@@ -89,7 +89,10 @@ class Users {
             } else {
               res.status(200).json({
                 message:'berhasil signin',
-                token:token
+                token:token,
+                id:payload._id,
+                role:payload.role,
+                username:payload.name
               })
             }
           })
