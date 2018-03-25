@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
   data () {
     return {
@@ -38,6 +39,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'writeBlog'
+    ]),
     openForm () {
       this.isCreating = true
     },
@@ -45,15 +49,14 @@ export default {
       this.isCreating = false
     },
     sendForm () {
-      if (this.todoName.length > 0) {
-        const name = this.todoName
-        this.$emit('create-todo', {
-          name,
-          done: false
-        })
-        this.newTodoText = ''
+      if (this.blogTitle.length > 0 && this.blogContent.length > 0) {
+        let obj = {
+          title: this.blogTitle,
+          content: this.blogContent
+        }
+        this.writeBlog(obj)
+        this.closeForm()
       }
-      this.isCreating = false
     }
   }
 }

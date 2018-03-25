@@ -9,31 +9,12 @@
             <br>
             <h4>ARTICLE LIST</h4>
             <ul class="nav">
-              <li v-for= '(post,idx) in posts' :key='idx'>
-                <a @click = 'changeIndex(idx)'><i class="glyphicon glyphicon-book"></i>{{post.title}}</a>
-                <span class='right floated edit icon' v-on-click= "showForm">
-                  <button>Edit</button>
-                </span>
-                <span class='right floated trash icon' v-on-click="deleteTodo(post._id)">
-                  <button>Delete</button>
-                </span>
-                <div class="content" v-show="isEditing">
-                  <div class='ui form'>
-                    <div class='field'>
-                      <label>Name</label>
-                      <input type='text' v-model="editTitle" >
-                    </div>
-                    <div class='field'>
-                      <label>Content</label>
-                      <input type='text' v-model="editContent" >
-                    </div>
-                    <div class='ui two button attached buttons'>
-                      <button class='ui basic blue button' v-on:click="hideForm">
-                        Close X
-                      </button>
-                    </div>
-                  </div>
-                </div>
+              <li>
+                <edit-form v-for='(editform, index) in posts' :key='index'
+                v-on:change-index = 'changeIndex'
+                v-bind:editform= 'editform'>
+                  <delivery-mode v-bind:del-mode-index = 'index'></delivery-mode>
+                </edit-form>
               </li>
             </ul>
           </div>
@@ -52,7 +33,8 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
+import EditForm from '@/components/EditForm'
 import NavBar from '@/components/NavBar'
 import CreateBlog from '@/components/CreateBlog'
 export default {
@@ -73,18 +55,30 @@ export default {
     ])
   },
   components: {
-    NavBar,CreateBlog
+    NavBar, CreateBlog, EditForm
   },
   methods: {
-    changeIndex (index) {
-      this.index = index
+    ...mapActions([
+      'fetchData',
+      'editTodo'
+    ]),
+    changeIndex (payload) {
+      this.posts.map((data, index) => {
+        if (data._id === payload) {
+          this.index = index
+        }
+      })
     },
     showForm () {
+      console.log('masuk')
       this.isEditing = true
     },
     hideForm () {
       this.isEditing = false
     }
+  },
+  created () {
+    this.fetchData()
   }
 }
 </script>

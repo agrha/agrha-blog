@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 import NavBar from '@/components/NavBar'
 
 export default {
@@ -48,9 +48,15 @@ export default {
     NavBar
   },
   methods: {
+    ...mapActions([
+      'fetchData'
+    ]),
     changeIndex (index) {
       this.index = index
     }
+  },
+  created () {
+    this.fetchData()
   }
 }
 </script>

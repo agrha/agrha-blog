@@ -9,11 +9,7 @@ let url = `http://localhost:3000`
 Vue.use(Vuex)
 
 const state = {
-  posts: [
-    {title: 'makan bareng Agrha', content: 'makan bareng orang paling ganteng sedunia'},
-    {title: 'makan bareng Mega', content: 'makan bareng orang paling nyebelin sedunia'},
-    {title: 'makan bareng Habibi', content: 'makan bareng orang paling baik sedunia'}
-  ],
+  posts: [],
   username: username,
   role: role,
   id: id
@@ -38,22 +34,68 @@ const getters = {
 }
 
 const mutations = {
+  fetchData (state, payload) {
+    state.posts = payload
+  },
+  addData (state, payload) {
+    state.posts.push(payload)
+  },
+  editData (state, payload) {
+    state.posts.map((data, index) => {
+      // console.log(payload.id)
+      if (payload.id === data._id) {
+        state.posts[index] = payload
+      }
+    })
+  },
+  deleteData (state, payload) {
+    state.posts.map((data, index) => {
+      if (payload.id === data._id) {
+        state.posts.splice(index, 1)
+      }
+    })
+  }
 }
 
 const actions = {
   fetchData ({commit}) {
+    console.log('masuk fetch')
     axios.get(`${url}/articles`)
       .then(data => {
-        console.log('hasil fetch', data.data)
-        commit('setData', data.data)
+        console.log('hasil fetch', data.data.data)
+        commit('fetchData', data.data.data)
+      })
+  },
+  editBlog ({commit}, obj) {
+    axios.put(`${url}/articles/${obj.id}`, obj, {headers: {token: localStorage.getItem('token')}})
+      .then(data => {
+        console.log('edit', data.data)
+        commit('editData', obj)
+      })
+      .catch(err => {
+        console.log('error edit', err)
+      })
+  },
+  writeBlog ({commit}, obj) {
+    axios.post(`${url}/articles`, obj, {headers: {token: localStorage.getItem('token')}})
+      .then(response => {
+        console.log(response.data)
+        commit('addData', obj)
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  },
+  deleteBlog ({commit}, obj) {
+    axios.delete(`${url}/articles/${obj.id}`, {headers: {token: localStorage.getItem('token')}})
+      .then(response => {
+        console.log(response.data)
+        commit('deleteData', obj)
+      })
+      .catch(err => {
+        console.log('error when deleting article', err)
       })
   }
-  // writeBlog ({commit}) {
-  //   axios.post(`${url}/articles/create`, obj)
-  //     .then(response => {
-  //       console.log(response)
-  //     })
-  // }
 }
 
 export default new Vuex.Store({
