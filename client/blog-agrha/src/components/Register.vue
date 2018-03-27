@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <form>
-      <input type="text" placeholder='input your username here' v-model = 'username'>
-      <br>
-      <input type="text" placeholder='input your password here' v-model = 'password'>
-      <br>
-      <button @click = 'signUp'>Sign-Up</button>
-    </form>
-  </div>
+  <div class="container jumbotron">
+  <h2>Register</h2>
+  <form>
+    <div class="form-group">
+      <label for="email">Username:</label>
+      <input v-model= 'username' type="text" class="form-control"  placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input v-model= 'password' type="password" class="form-control" placeholder="Enter password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
 </template>
 
 <script>

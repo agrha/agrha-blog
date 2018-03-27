@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class='jumbotron'>
     <H1>
       Welcome To My Blog
     </H1>
-    <button @click = 'toRegister'>Register</button>
-    <button @click = 'toSignIn'>Signin</button>
+    <button @click = 'toRegister' class="btn btn-primary">Register</button>
+    <button @click = 'toSignIn' class="btn btn-primary">Signin</button>
   </div>
 </template>
 

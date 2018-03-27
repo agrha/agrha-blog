@@ -1,13 +1,18 @@
 <template>
-  <div class = 'container'>
-    <form >
-      <input v-model = 'username' v-focus>
-      <br>
-      <input v-model = 'password'>
-    </form>
-    <button @click = 'login'>Login</button>
-    <button @click = 'register'>Register</button>
-  </div>
+  <div class="container jumbotron">
+  <h2>Sign In</h2>
+  <form>
+    <div class="form-group">
+      <label for="email">Username:</label>
+      <input v-model= 'username' type="text" class="form-control"  placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input v-model= 'password' type="password" class="form-control" placeholder="Enter password">
+    </div>
+    <button @click= 'login()' class="btn btn-primary">Submit</button>
+  </form>
+</div>
 </template>
 
 <script>

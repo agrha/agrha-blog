@@ -41,12 +41,10 @@ const mutations = {
     state.posts.push(payload)
   },
   editData (state, payload) {
-    state.posts.map((data, index) => {
-      // console.log(payload.id)
-      if (payload.id === data._id) {
-        state.posts[index] = payload
-      }
-    })
+    console.log(payload)
+    let index = state.posts.findIndex(post => post._id === payload.id)
+    console.log(index)
+    state.posts.splice(index, 1, payload)
   },
   deleteData (state, payload) {
     state.posts.map((data, index) => {
@@ -69,7 +67,7 @@ const actions = {
   editBlog ({commit}, obj) {
     axios.put(`${url}/articles/${obj.id}`, obj, {headers: {token: localStorage.getItem('token')}})
       .then(data => {
-        console.log('edit', data.data)
+        console.log('edit', data)
         commit('editData', obj)
       })
       .catch(err => {
@@ -95,6 +93,10 @@ const actions = {
       .catch(err => {
         console.log('error when deleting article', err)
       })
+  },
+  logout () {
+    localStorage.clear()
+    window.location.href = '/'
   }
 }
 

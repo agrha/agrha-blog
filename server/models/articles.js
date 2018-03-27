@@ -9,9 +9,6 @@ const articleSchema = new Schema({
   title:{
     type:String
   },
-  image:{
-    type:String
-  },
   content:{
     type:String
   }

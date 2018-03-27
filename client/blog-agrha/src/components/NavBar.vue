@@ -1,15 +1,13 @@
 <template>
-  <nav class="navbar navbar-light navbar-static-top" role="navigation" style="background-color: #9999ff; margin-bottom: 0">
-    <ul class="nav navbar-top-links navbar-right" style= "float: right;">
-      <div>
-        <h3>B L O G</h3>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Blog-Agrha</a>
       </div>
-      <div>
-        <p class="btn btn-info btn-lg" @click= 'logout' style='margin-left:15px' align='right'>
-          <span class="glyphicon glyphicon-log-out"></span> Log out
-        </p>
-      </div>
-    </ul>
+      <ul class="nav navbar-nav">
+        <button class = 'btn btn-primary' @click='logout'>Log Out</button>
+      </ul>
+    </div>
   </nav>
 </template>
 
@@ -21,8 +19,13 @@ export default {
   },
   methods: {
     logout () {
-      localStorage.clear()
-      this.$router.push({name: 'SignIn'})
+      if (localStorage.getItem('token')) {
+        localStorage.clear()
+        this.$router.push('Home')
+      } else {
+        alert('you have to login first')
+        this.$router.push('Login')
+      }
     }
   }
 }

@@ -27,7 +27,7 @@
             <input type='text' v-model="editContent" value='editform.content' >
           </div>
           <div class='ui two button attached buttons'>
-            <button class='ui basic blue button' v-on:click ='sendForm(editform._id)'>
+            <button class='ui basic blue button' @click ='sendForm(editform._id)'>
               Update
             </button>
             <button class='ui basic blue button' v-on:click="hideForm">
@@ -58,6 +58,7 @@ export default {
       this.isEditing = false
     },
     sendForm (payload) {
+      console.log('payload editform', payload)
       let obj = {
         id: payload,
         title: this.editTitle,
