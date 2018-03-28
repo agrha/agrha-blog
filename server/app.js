@@ -9,7 +9,9 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles')
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/blog-agrha')
+
+mongourl = `mongodb://agrha:daun10lembar@ds227469.mlab.com:27469/blog-masku`
+mongoose.connect(mongourl)
 
 var app = express();
 

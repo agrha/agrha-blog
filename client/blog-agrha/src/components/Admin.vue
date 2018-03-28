@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <navbar/>
+    <Navbar/>
     <div class="row profile">
       <div class="col-md-4 jumbotron">
         <div class="profile-sidebar">
@@ -35,7 +35,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import EditForm from '@/components/EditForm'
-import navbar from '@/components/NavBar'
+import Navbar from '@/components/NavBar'
 import CreateBlog from '@/components/CreateBlog'
 export default {
   data () {
@@ -55,16 +55,12 @@ export default {
     ])
   },
   components: {
-    navbar, CreateBlog, EditForm
+    Navbar, CreateBlog, EditForm
   },
   methods: {
-    keluar () {
-      console.log('haha ')
-    },
     ...mapActions([
       'fetchData',
-      'editTodo',
-      'logout '
+      'editTodo'
     ]),
     changeIndex (payload) {
       this.posts.map((data, index) => {
@@ -83,11 +79,6 @@ export default {
   },
   created () {
     this.fetchData()
-  },
-  watch: {
-    posts () {
-      this.posts
-    }
   }
 }
 </script>

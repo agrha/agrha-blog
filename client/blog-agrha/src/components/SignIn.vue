@@ -10,7 +10,8 @@
       <label for="pwd">Password:</label>
       <input v-model= 'password' type="password" class="form-control" placeholder="Enter password">
     </div>
-    <button @click= 'login()' class="btn btn-primary">Submit</button>
+    <button @click= 'login()' class="btn btn-primary">Login</button>
+    <button @click= 'register()' class="btn btn-primary">Register</button>
   </form>
 </div>
 </template>

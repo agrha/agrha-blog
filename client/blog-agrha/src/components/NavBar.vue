@@ -5,7 +5,7 @@
         <a class="navbar-brand" href="#">Blog-Agrha</a>
       </div>
       <ul class="nav navbar-nav">
-        <button class = 'btn btn-primary' @click='logout'>Log Out</button>
+        <button class = 'btn btn-primary' @click="logout">Log Out</button>
       </ul>
     </div>
   </nav>
@@ -19,13 +19,10 @@ export default {
   },
   methods: {
     logout () {
-      if (localStorage.getItem('token')) {
-        localStorage.clear()
-        this.$router.push('Home')
-      } else {
-        alert('you have to login first')
-        this.$router.push('Login')
-      }
+      console.log('MASUK LOGOUT')
+      localStorage.clear()
+      this.$router.push('/')
     }
   }
 }
+</script>

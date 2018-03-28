@@ -81,7 +81,8 @@ export default {
     },
     ...mapActions([
       'editBlog',
-      'deleteBlog'
+      'deleteBlog',
+      'fetchData'
     ])
   }
 }

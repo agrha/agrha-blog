@@ -8,4 +8,5 @@ router.post('/admin',Users.createAdmin)
 router.post('/signup',Users.signup)
 router.post('/signin',Users.signin)
 
+
 module.exports = router;

@@ -93,10 +93,6 @@ const actions = {
       .catch(err => {
         console.log('error when deleting article', err)
       })
-  },
-  logout () {
-    localStorage.clear()
-    window.location.href = '/'
   }
 }
 
